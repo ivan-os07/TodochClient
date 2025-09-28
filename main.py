@@ -9,7 +9,7 @@ from logger import main_logger
 
 from settings import BotSettings
 
-from handlers import start_router, help_router
+from handlers import *
 
 settings = BotSettings()
 
@@ -26,9 +26,10 @@ async def main() -> None:
         sys.exit(1)
 
     dp = Dispatcher()
-    dp.include_routers(start_router, help_router)
+    dp.include_routers(start_router, help_router, register_router)
 
     try:
+        await bot.delete_webhook(drop_pending_updates=True)
         await dp.start_polling(bot)
 
     except Exception as e:
