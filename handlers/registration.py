@@ -23,5 +23,6 @@ async def process_name(message: Message, state: FSMContext) -> None:
     data = await state.update_data(name=message.text)
     await state.clear()
 
-    print(data)
+    await message.answer(text=f"Hello, {data["name"]}")
+    # print(data)
     # реализовать проверку midleware на наличие username
